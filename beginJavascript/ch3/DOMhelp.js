@@ -39,7 +39,7 @@ DOMhelp={
 		while(tempObj.nodeType!=3 && tempObj.nextSibling!=null || reg.test(tempObj.nodeValue)){
 			tempObj=tempObj.nextSibling;
 		}
-		if(tempObj.nodeType==3){tempObj.nodeValue=txt}else{return false;}
+		if(tempObj.nodeType==3){tempObj.nodeValue=txt;}else{return false;}
 	},
 	createLink:function(to,txt){
 		var tempObj=document.createElement('a');

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="global.css"/>
+    <style type="text/css">
+        .big {
+            font-size: 20px;
+        }
+
+        * {
+            margin: 10em;
+        }
+    </style>
+    <style type="text/css">
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div style="border: 10px solid greenyellow">hi<span>beginJavascript</span></div>
+<div class="big">http://github.com/renyunhuang</div>
+</body>
+<script type="text/javascript">
+   /**
+    * removeCss
+    * Written By: http://github.com/renyunhuang
+    * time:2015年12月29日16:26:18
+    */
+    function removeCss() {
+        if (!document.getElementById || !document.createElement) return;
+        var html = document.getElementsByTagName('html')[0];
+        if (!html) return;
+
+        disableStyle();
+
+        var firstNode = html.firstChild;
+
+        while (firstNode) {
+            cleanUp(firstNode);
+            firstNode = firstNode.nextSibling ? firstNode.nextSibling : null;
+        }
+    }
+    /**
+     * remove attributes
+     * @param node
+     */
+    function cleanUp(node) {
+
+        if (node.nodeType != 1 || !/\d+/.test(node.childNodes.length.toString())) return;
+
+        for (var i = 0; i < node.childNodes.length; ++i) {
+            cleanUp(node.childNodes[i]);
+        }
+
+        if (node.hasAttribute('class')) node.removeAttribute('class');
+        if (node.hasAttribute('style')) node.removeAttribute('style');
+        if (node.hasAttribute('color')) node.remove('color');
+    }
+    /**
+     * disable stylesheet
+     */
+    function disableStyle() {
+        var styleSheetList = document.styleSheets;
+        for (var i = 0; i < styleSheetList.length; ++i) {
+            styleSheetList[i].disabled = true;
+        }
+    }
+    window.onload = removeCss();
+</script>
+</html>
